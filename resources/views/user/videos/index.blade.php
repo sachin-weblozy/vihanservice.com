@@ -17,8 +17,8 @@
             @forelse($files as $file)
             <div class="col-lg-6 col-xl-6 mb-24px">
                 <div class="ec-user-card card card-default p-4">
-                    <a href="{{ route('user.videos.show',$file->id) }}" class="view-detail"></a>
-                    <a href="{{ route('user.videos.show',$file->id) }}" target="_blank" class="media text-secondary">
+                    <a href="{{ route('user.videos.show',encrypt($file->id)) }}" class="view-detail"></a>
+                    <a href="{{ route('user.videos.show',encrypt($file->id)) }}" target="_blank" class="media text-secondary">
                         <img src="{{ asset('assets/img/user/play.png') }}" class="mr-3 img-fluid" alt="video">
 
                         <div class="media-body">

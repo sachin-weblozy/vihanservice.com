@@ -50,7 +50,7 @@
                                         <td>
                                             <div class="btn-group mb-1">
                                                 
-                                                <button type="button" class="btn btn-outline-success"><a href="{{ route('user.reports.show', $report->ticket_id) }}" class="text-success">View</a></button>
+                                                <button type="button" class="btn btn-outline-success"><a href="{{ route('user.reports.show', encrypt($report->ticket_id)) }}" class="text-success">View</a></button>
                                                 <button type="button"
                                                     class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
                                                     data-bs-toggle="dropdown" aria-haspopup="true"

@@ -17,8 +17,8 @@
             @forelse($files as $file)
             <div class="col-lg-6 col-xl-6 mb-24px">
                 <div class="ec-user-card card card-default p-4">
-                    <a href="{{ route('user.files.show',$file->id) }}" class="view-detail"></a>
-                    <a href="{{ route('user.files.show',$file->id) }}" target="_blank" class="media text-secondary">
+                    <a href="{{ route('user.files.show',encrypt($file->id)) }}" class="view-detail"></a>
+                    <a href="{{ route('user.files.show',encrypt($file->id)) }}" target="_blank" class="media text-secondary">
                         <img src="{{ asset('assets/img/user/file.png') }}" class="mr-3 img-fluid" alt="file">
 
                         <div class="media-body">
@@ -35,7 +35,7 @@
                 </div>
             </div>
             @empty
-            No Video Found
+            No File Found
             @endforelse
         </div>
     </div>

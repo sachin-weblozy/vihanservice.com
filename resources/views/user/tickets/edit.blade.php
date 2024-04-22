@@ -12,7 +12,7 @@
                     <span><i class="mdi mdi-chevron-right"></i></span>Edit Ticket</p>
             </div>
             <div>
-                <a href="{{ route('admin.tickets.index') }}" class="btn btn-primary"> View All
+                <a href="{{ route('user.tickets.index') }}" class="btn btn-primary"> View All
                 </a>
             </div>
         </div>
@@ -20,88 +20,109 @@
             <div class="col-12">
                 <div class="card card-default">
                     <div class="card-header card-header-border-bottom">
-                        <h2>Edit Ticket</h2>
+                        <h2>Edit Ticket ID: {{ $ticket->id ?? '' }}</h2>
                     </div>
-
+                    @if(old('type')==2)
+                    <script>
+                        $(document).ready(function() {
+                            $('.type2').addClass('d-none');
+                        });
+                    </script>
+                    @endif
                     <div class="card-body">
                         <div class="row ec-vendor-uploads">
                             <div class="col-lg-12">
                                 <div class="ec-vendor-upload-detail">
-                                    <form class="row g-3" action="{{ route('user.tickets.update',$ticket->id) }}" method="POST" method="POST" enctype="multipart/form-data">
+                                    <form class="row g-3" action="{{ route('user.tickets.update',encrypt($ticket->id)) }}" method="POST" id="audioForm" enctype="multipart/form-data">
                                         @csrf
-                                        @method('put')
-                                        @csrf
+                                        @method('PUT')
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <label for="name" class="form-label">Executive Name*</label>
-                                                <input type="text" class="form-control slug-title" id="name" name="name" value="{{ Auth::user()->name ?? '' }}" readonly>
+                                                <input type="text" class="form-control slug-title" id="name" name="name" value="{{ old('name') ?? $ticket->user->name }}" placeholder="Full Name" readonly>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <label for="phone" class="form-label">Phone*</label>
-                                                <input type="text" class="form-control slug-title" id="phone" name="phone" value="{{ Auth::user()->phone ?? '' }}" readonly>
+                                                <input type="text" class="form-control slug-title" id="phone" name="phone" value="{{ old('phone') ?? $ticket->user->phone }}" placeholder="Phone Number" readonly>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <label for="email" class="form-label">Email*</label>
-                                                <input type="email" class="form-control slug-title" id="email" name="email" value="{{ Auth::user()->email ?? '' }}" readonly>
+                                                <input type="email" class="form-control slug-title" id="email" name="email" value="{{ old('email') ?? $ticket->user->email }}" placeholder="Email Address" readonly>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="company" class="form-label">Company*</label>
+                                                <input type="text" class="form-control slug-title" id="company" name="company" value="{{ old('company') ?? $ticket->user->company }}" placeholder="Enter Company Name" readonly>
                                             </div>
                                         </div>
                                         <hr><br>
-                                        <div class="row">
+
+                                        @if($ticket->type !=2)
+                                        <div class="row type2">
                                             <div class="col-md-6">
                                                 <label for="machine_model" class="form-label">Installed Machine*</label>
-                                                <input type="text" class="form-control slug-title" id="machine_model" name="machine_model" placeholder="Type Machine Model Name" value="{{ old('machine_model',$ticket->machine_model) }}">
+                                                <input type="text" class="form-control slug-title" id="machine_model" name="machine_model" value="{{ old('machine_model') ?? $ticket->machine_model }}" placeholder="Type Machine Model Name">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="machine_serialno" class="form-label">Machine Serial No*</label>
-                                                <input type="text" class="form-control slug-title" id="machine_serialno" name="machine_serialno" placeholder="Type Machine Serial No" value="{{ old('machine_model',$ticket->machine_serial) }}">
+                                                <input type="text" class="form-control slug-title" id="machine_serialno" name="machine_serialno" value="{{ old('machine_serialno') ?? $ticket->machine_serial }}" placeholder="Type Machine Serial No">
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row type2">
                                             <div class="col-md-4">
                                                 <label class="form-label">Type of Issue*</label>
                                                 <select name="issue_type" id="issue_type" class="form-select form-control">
+                                                    <option value="" selected disabled>Select</option>
                                                     @forelse($issueTypes as $issuetype)
-                                                    <option value="{{ $issuetype->id }}" @if($issuetype->id == $ticket->issue_type_id) selected @endif>{{ $issuetype->name ?? '' }}</option>
+                                                    <option value="{{ $issuetype->id }}" @if($ticket->issue_type_id == $issuetype->id) selected @endif>{{ $issuetype->name ?? '' }}</option>
                                                     @empty 
                                                     @endforelse
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
-                                                <label class="form-label">What is Faulty?</label>
+                                                <label class="form-label">What is the Fault?</label>
                                                 <select name="issue_specifications" id="issue_specifications" class="form-select form-control">
-                                                    @forelse($issueSpecs as $issuespecs)
-                                                    <option value="{{ $issuespecs->id }}" @if($issuespecs->id == $ticket->issue_specs_id) selected @endif>{{ $issuespecs->name ?? '' }}</option>
-                                                    @empty 
-                                                    @endforelse
+                                                    <option value="{{ $ticket->issue_specs_id }}" @if($ticket->issue_specs_id == $issuetype->id) selected @endif>{{ $ticket->issuespec->name ?? '' }}</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
                                                 <label class="form-label">What has failed?</label>
                                                 <select name="issue_subspecifications" id="issue_subspecifications" class="form-select form-control">
-                                                    @forelse($issueSubSpecs as $issuesubspecs)
-                                                    <option value="{{ $issuesubspecs->id }}" @if($issuesubspecs->id == $ticket->issue_subspecs_id) selected @endif>{{ $issuesubspecs->name ?? '' }}</option>
-                                                    @empty 
-                                                    @endforelse
+                                                    <option value="{{ $issuetype->id }}" @if($ticket->issue_subspecs_id == $issuetype->id) selected @endif>{{ $ticket->issuesubspec->name ?? '' }}</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 type2">
                                             <label for="name" class="form-label">Issue</label>
-                                            <input type="text" class="form-control slug-title" id="title" name="title" placeholder="What is the Issue?" value="{{ old('title',$ticket->title) }}">
+                                            <input type="text" class="form-control slug-title" id="title" name="title" placeholder="What is the Issue?" value="{{ old('title') ?? $ticket->title }}">
                                         </div>
+                                        @endif
+                                        
                                         <div class="col-md-12">
                                             <label class="form-label">Description/Details*</label>
-                                            <textarea name="description" class="form-control" rows="4" placeholder="Mention the Issue in Detail">{{ old('description',$ticket->description) }}</textarea>
+                                            <textarea name="description" class="form-control" rows="4" placeholder="Mention the Issue in Detail">{{ old('description') ?? $ticket->description }}</textarea>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="files" class="form-label">Upload Files (Select Multiple Files)</label>
-                                                <input type="file" class="form-control slug-title" id="files" name="files" multiple>
+                                                <input type="file" class="form-control slug-title mb-0" id="files" name="files[]" multiple>
+                                                <small class="mt-0">Add more files</small>
+                                                <p>Uploaded Files:</p>
+                                                @forelse($files as $file)
+                                                <p><a href="{{ asset('uploads/ticket_files/'.$ticket->id.'/'.basename($file)) }}" target="_blank">{{ basename($file) }}</a></p>
+                                                @empty 
+                                                No file found 
+                                                @endforelse
+                                                <div id="progressBar"></div>
                                             </div>
                                             <div class="col-md-6 icon-box001">
-                                                <label for="files" class="form-label">Record Your Voice</label>
-                                                <span class="iconbx mdi mdi-microphone px-3"></span>
+                                                <label for="recAudio" class="form-label">Record your voice (explain the issue)</label>
+                                                <div class="d-flex">
+                                                    <span id="startRecording" class="mdi mdi-microphone" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Start Recording"></span>
+                                                    <span id="stopRecording" class="mdi mdi-microphone-off" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Stop Recording"></span>
+                                                    <span id="downloadRecording" class="mdi mdi-download" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Download Recording"></span>
+                                                    <input type="file" class="form-control slug-title" name="recAudio" id="recAudio">
+                                                </div>
                                             </div>
                                         </div>
                                         <hr>
@@ -120,40 +141,135 @@
 </div>
 
 <script>
-    $(document).ready(function() {
-        $('#issue_type').change(function() {
-            var issuetypeid = $(this).val();
-            
-            $.ajax({
-                type: "GET",
-                url: '/user/fetch-specs/' + issuetypeid,
-                success: function(data) {
-                    $('#issue_specifications').empty();
-                    $('#issue_subspecifications').empty();
-                    $('#issue_specifications').append('<option value="" selected disabled>Select</option>');
-                    $.each(data, function(key, value) {
-                        $('#issue_specifications').append('<option value="' + value.id + '">' + value.name + '</option>');
-                    });
-                }
-            });
-        });
 
-        $('#issue_specifications').change(function() {
-            var issuespecid = $(this).val();
-            
-            $.ajax({
-                type: "GET",
-                url: '/user/fetch-subspecs/' + issuespecid,
-                success: function(data) {
-                    $('#issue_subspecifications').empty();
-                    $('#issue_subspecifications').append('<option value="" selected disabled>Select</option>');
-                    $.each(data, function(key, value) {
-                        $('#issue_subspecifications').append('<option value="' + value.id + '">' + value.name + '</option>');
-                    });
-                }
+    document.addEventListener('DOMContentLoaded', function() {
+        const uploadForm = document.getElementById('uploadForm');
+        const progressBar = document.getElementById('progressBar');
+    
+        uploadForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const formData = new FormData(this);
+    
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/upload');
+    
+            xhr.upload.addEventListener('progress', function(event) {
+                const percentComplete = (event.loaded / event.total) * 100;
+                progressBar.style.width = percentComplete + '%';
             });
+    
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        alert('Files uploaded successfully!');
+                    } else {
+                        alert('Upload failed: ' + response.message);
+                    }
+                } else {
+                    alert('Upload failed: ' + xhr.statusText);
+                }
+            };
+    
+            xhr.onerror = function() {
+                alert('Network error occurred.');
+            };
+    
+            xhr.send(formData);
         });
     });
-
-</script>
+    
+            const startRecordingButton = document.getElementById('startRecording');
+            const stopRecordingButton = document.getElementById('stopRecording');
+            const downloadRecordingButton = document.getElementById('downloadRecording');
+            const recAudioInput = document.getElementById('recAudio');
+    
+            let recorder, audioChunks = [];
+    
+            startRecordingButton.addEventListener('click', async () => {
+                event.preventDefault();
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    recorder = new MediaRecorder(stream);
+                    recorder.ondataavailable = (e) => {
+                        audioChunks.push(e.data);
+                    };
+                    recorder.start();
+                    startRecordingButton.disabled = true;
+                    stopRecordingButton.disabled = false;
+                } catch(err) {
+                    console.error("Error accessing microphone:", err);
+                }
+            });
+    
+            stopRecordingButton.addEventListener('click', () => {
+                event.preventDefault();
+                recorder.stop();
+                stopRecordingButton.disabled = true;
+                downloadRecordingButton.disabled = false;
+            });
+    
+            downloadRecordingButton.addEventListener('click', () => {
+                event.preventDefault();
+                const blob = new Blob(audioChunks, { type: 'audio/webm' });
+                const url = window.URL.createObjectURL(blob);
+                const filename = 'recording.webm';
+                const link = document.createElement('a');
+                console.log(link);
+                link.href = url;
+                link.download = filename;
+                link.click();
+            });
+    
+    
+        $(document).ready(function() {
+            $('input[name="type"]').click(function() {
+                var selectedOption = $(this).val();
+                if (selectedOption == 2) {
+                    $('.type2').addClass('d-none');
+                } else {
+                    $('.type2').removeClass('d-none');
+                }
+            });
+        });
+    
+    
+        $(document).ready(function() {
+            $('#issue_type').change(function() {
+                var issuetypeid = $(this).val();
+                
+                $.ajax({
+                    type: "GET",
+                    url: '/admin/fetch-specs/' + issuetypeid,
+                    success: function(data) {
+                        $('#issue_specifications').empty();
+                        $('#issue_subspecifications').empty();
+                        $('#issue_specifications').append('<option value="" selected disabled>Select</option>');
+                        $('#issue_subspecifications').append('<option value="" selected disabled>Select</option>');
+                        $.each(data, function(key, value) {
+                            $('#issue_specifications').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+    
+            $('#issue_specifications').change(function() {
+                var issuespecid = $(this).val();
+                
+                $.ajax({
+                    type: "GET",
+                    url: '/admin/fetch-subspecs/' + issuespecid,
+                    success: function(data) {
+                        $('#issue_subspecifications').empty();
+                        $('#issue_subspecifications').append('<option value="" selected disabled>Select</option>');
+                        $.each(data, function(key, value) {
+                            $('#issue_subspecifications').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+    
+    </script>
 @endcomponent

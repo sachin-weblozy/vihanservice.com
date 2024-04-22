@@ -8,6 +8,7 @@ use App\Jobs\SendNewTicektMailUser;
 use App\Mail\AdminNewTicketMail;
 use App\Models\Issuetype;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -74,17 +75,26 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {   
-        $request->validate([
-            'machine_model'=>'required',
-            'machine_serialno'=>'required',
-            'issue_type'=>'required',
-            'issue_specifications'=>'sometimes',
-            'issue_subspecifications'=>'sometimes',
-            'title'=>'sometimes',
-            'description' => 'required',
-            'type'=>'required',
-            'files'=>'sometimes'
-        ]);
+        if($request->type==2){
+            $request->validate([
+                'machine_model'=>'sometimes',
+                'machine_serialno'=>'sometimes',
+                'issue_type'=>'sometimes',
+                'issue_specifications'=>'sometimes',
+                'issue_subspecifications'=>'sometimes',
+                'title'=>'sometimes',
+                'description' => 'sometimes',
+            ]);
+        }else{
+            $request->validate([
+                'name'=>'required',
+                'phone'=>'required',
+                'company'=>'required',
+                'type'=>'required',
+                'email'=>'required|email',
+                'files'=>'sometimes'
+            ]);
+        }
         
         $result = Ticket::create([
             'machine_model'=>$request->machine_model,
@@ -96,7 +106,7 @@ class TicketController extends Controller
             'user_id'=>Auth::id(),
             'description'=>$request->description,
             'status'=> '1',
-            'status'=> $request->type,
+            'type'=> $request->type,
         ]);
 
         if($result){
@@ -120,12 +130,18 @@ class TicketController extends Controller
                 $audiofile->move($filePath, $fileName);
             }
 
+            $usersemail = [];
+            $users =  User::role(['superadmin' , 'admin'])->get()->pluck('email')->toArray();
+            foreach($users as $user){
+                array_push($usersemail, $user);
+            }
+
             $userDetails = [
                 'email' => Auth::user()->email,
                 'ticket_id' => $result->id,
             ];
             $adminDetails = [
-                'email' => 'sachin10157@weblozy.com',
+                'email' => $usersemail,
                 'ticket_id' => $result->id,
             ];
 
@@ -140,56 +156,115 @@ class TicketController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         $files=[];
-        $ticket = Ticket::findOrFail($id);
-        $filePath = 'uploads/ticket_files/'.$ticket->id.'/';
-        if (File::exists(public_path($filePath))) {
-            $files = File::allFiles(public_path($filePath));
-        }
-        return view('user.tickets.show',compact('ticket','files'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Ticket $ticket)
-    {
-        $issueTypes = Issuetype::where('parent_id',null)->get();
-        $issueSpecs = Issuetype::where('parent_id',$ticket->issue_type_id)->get();
-        $issueSubSpecs = Issuetype::where('parent_id',$ticket->issue_specs_id)->get();
-        return view('user.tickets.edit',compact('ticket','issueTypes','issueSpecs','issueSubSpecs'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Ticket $ticket)
-    {
-        $validated = $request->validate([
-            'machine_model'=>'required',
-            'machine_serialno'=>'required',
-            'issue_type'=>'required',
-            'issue_specifications'=>'sometimes',
-            'issue_subspecifications'=>'sometimes',
-            'title'=>'sometimes',
-            'description' => 'required',
-            'files'=>'sometimes'
-        ]);
-
-        $result = $ticket->update($validated);
-        if($result){
-            toastr()->success('Ticket Update');
+        $ticket = Ticket::where([['user_id', '=', Auth::id()],['id', '=', decrypt($id)]])->first();
+        if($ticket){
+            $filePath = 'uploads/ticket_files/'.$ticket->id.'/';
+            if (File::exists(public_path($filePath))) {
+                $files = File::allFiles(public_path($filePath));
+            }
+            return view('user.tickets.show',compact('ticket','files'));
+        }else{
+            toastr()->error('Not Found');
             return to_route('user.tickets.index');
         }
     }
 
     /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
+        $files=[];
+        $ticket = Ticket::where([['user_id', '=', Auth::id()],['id', '=', decrypt($id)]])->first();
+        if($ticket){
+            $filePath = 'uploads/ticket_files/'.$ticket->id.'/';
+            if (File::exists(public_path($filePath))) {
+                $files = File::allFiles(public_path($filePath));
+            }
+            $issueTypes = Issuetype::where('parent_id',null)->get();
+            return view('user.tickets.edit',compact('ticket','files','issueTypes'));
+        }else{
+            toastr()->error('Not Found');
+            return to_route('user.tickets.index');
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+        $ticket = Ticket::where([['user_id', '=', Auth::id()],['id', '=', decrypt($id)]])->first();
+        if($ticket){
+            if($ticket->type==2){
+                $request->validate([
+                    'description' => 'sometimes',
+                    'files'=>'sometimes',
+                ]);
+
+                $ticket->description = $request->description;
+            }else{
+                $request->validate([
+                    'machine_model'=>'required',
+                    'machine_serialno'=>'required',
+                    'issue_type'=>'required',
+                    'issue_specifications'=>'sometimes',
+                    'issue_subspecifications'=>'sometimes',
+                    'title'=>'sometimes',
+                    'description' => 'required',
+                    'files'=>'sometimes'
+                ]);
+                $ticket->machine_model = $request->machine_model;
+                $ticket->machine_serial = $request->machine_serialno;
+                $ticket->issue_type_id = $request->issue_type;
+                $ticket->issue_specs_id = $request->issue_specifications;
+                $ticket->issue_subspecs_id = $request->issue_subspecifications;
+                $ticket->title = $request->title;
+                $ticket->description = $request->description;
+
+            }
+            $result = $ticket->save();
+
+            if($result){
+                $files = [];
+                if ($request->hasFile('files')) {
+                    $files = [];
+                    $filePath = 'uploads/ticket_files/'.$ticket->id.'/';
+        
+                    foreach($request->file('files') as  $file)
+                    {
+                        $fileName = 'ticket_'.$ticket->id.'_'.time().rand(1,99).'.'.$file->extension();
+                        $file->move($filePath, $fileName);
+                    }
+                }
+                if ($request->hasFile('recAudio')) {
+                    $filePath = 'uploads/ticket_files/'.$ticket->id.'/';
+                    $audiofile = $request->file('recAudio');
+        
+                    $fileName = 'ticket_'.$ticket->id.'_'.time().rand(1,99).'.'.$audiofile->extension();
+                    $audiofile->move($filePath, $fileName);
+                }
+                
+                toastr()->success('Ticket Updated');
+            }else{
+                toastr()->error('An error occured');
+            }
+        }else{
+            toastr()->error('No ticket found!');
+        }
+        return to_route('user.tickets.index');
+
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ticket $ticket)
+    public function destroy($id)
     {
+        $ticket = Ticket::where([['user_id', '=', Auth::id()],['id', '=', decrypt($id)]])->first();
         $result = $ticket->delete();
 
         if($result){
@@ -203,9 +278,16 @@ class TicketController extends Controller
     /**
      * Show the comments.
      */
-    public function comments(Ticket $ticket)
+    public function comments($id)
     {
-        return view('user.tickets.comments',compact('ticket'));
+        $ticket = Ticket::where([['user_id', '=', Auth::id()],['id', '=', decrypt($id)]])->first();
+        if($ticket){
+            return view('user.tickets.comments',compact('ticket'));
+        }else{
+            toastr()->error('Not Found');
+            return to_route('user.tickets.index');
+        }
+        
     }
 
     public function fetchSpecs($issuetypeid)
@@ -221,9 +303,15 @@ class TicketController extends Controller
     }
 
     // comments code 
-    public function showComments($ticketid)
+    public function showComments($id)
     {
-        $ticket = Ticket::findOrFail($ticketid);
-        return view('user.tickets.comments',compact('ticket'));
+        $ticket = Ticket::where([['user_id', '=', Auth::id()],['id', '=', decrypt($id)]])->first();
+        if($ticket){
+            return view('user.tickets.comments',compact('ticket'));
+        }else{
+            toastr()->error('Not Found');
+            return to_route('user.tickets.index');
+        }
+        
     }
 }

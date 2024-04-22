@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\VideoController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ use App\Http\Controllers\Admin\VideoController;
 
 Route::group(['middleware' => ['auth:sanctum', config('jetstream.auth_session'), 'verified', 'role:admin|superadmin|technician']], function () {
     Route::get('dashboard', [DashboardController::class, 'home'])->name('dashboard');
+    // Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::resource('tickets', TicketController::class);
     Route::resource('users', UsersController::class);
     Route::resource('permissions', PermissionController::class);

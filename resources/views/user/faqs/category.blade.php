@@ -18,8 +18,8 @@
             @forelse($faqs as $faq)
                 <div class="col-12">
 					<div class="ec-user-card card card-default p-4 mb-3">
-                        <a href="{{ route('user.faqs.show', $faq->id) }}" class="view-detail"></a>
-                        <a href="{{ route('user.faqs.show', $faq->id) }}" class="media text-secondary">
+                        <a href="{{ route('user.faqs.show', encrypt($faq->id)) }}" class="view-detail"></a>
+                        <a href="{{ route('user.faqs.show', encrypt($faq->id)) }}" class="media text-secondary">
     
                             <div class="media-body">
                                 <h5 class="mt-2 mb-2 text-dark">{{ $faq->name }}</h5>

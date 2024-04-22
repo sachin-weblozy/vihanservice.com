@@ -53,8 +53,8 @@ class FaqController extends Controller
      */
     public function show($id)
     {
-        $faqcategory = Faqcategory::where('id',$id)->first();
-        $faqs = Faq::where('category',$id)->latest()->get();
+        $faqcategory = Faqcategory::where('id',decrypt($id))->first();
+        $faqs = Faq::where('category',decrypt($id))->latest()->get();
         return view('user.faqs.index',compact('faqs','faqcategory'));
     }
 

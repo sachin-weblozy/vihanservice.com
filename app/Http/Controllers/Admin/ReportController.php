@@ -204,7 +204,9 @@ class ReportController extends Controller
                 foreach($users as $user){
                     array_push($usersemail, $user);
                 }
-                $usersemail[] = Auth::user()->email;
+                if(Auth::user()->hasRole('technician')){
+                    $usersemail[] = Auth::user()->email;
+                }
     
                 $details = [
                     'email' => $usersemail,

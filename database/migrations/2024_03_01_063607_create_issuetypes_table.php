@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('issuetypes', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->integer('parent_id')->nullable();
+            $table->integer('type')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -27,12 +27,17 @@ class ReportController extends Controller
      */
     public function show($ticketid)
     {
-        $ticket = Ticket::findOrFail($ticketid);
-        $data = [
-            'report'=>$ticket->report,
-        ];
-        $filename = 'report_'.$ticket->report->report_number.'.pdf';
-        $pdf = Pdf::loadView('pdf.ic_report', $data);
-        return $pdf->stream($filename);
+        $ticket = Ticket::where([['user_id', '=', Auth::id()],['id', '=', decrypt($ticketid)]])->first();
+        if($ticket){
+            $data = [
+                'report'=>$ticket->report,
+            ];
+            $filename = 'report_'.$ticket->report->report_number.'.pdf';
+            $pdf = Pdf::loadView('pdf.ic_report', $data);
+            return $pdf->stream($filename);
+        }else{
+            toastr()->error('Not Found');
+            return to_route('user.reports.index');
+        }
     }
 }

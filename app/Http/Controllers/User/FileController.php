@@ -61,7 +61,7 @@ class FileController extends Controller
      */
     public function show($id)
     {
-        $file = File::where('id',$id)->first();
+        $file = File::where('id',decrypt($id))->first();
         $filePath = asset($file->path.'/'.$file->name);
         return redirect($filePath);
     }

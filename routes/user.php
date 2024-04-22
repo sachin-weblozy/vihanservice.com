@@ -5,6 +5,7 @@ use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\TicketController;
 use App\Http\Controllers\User\FaqController;
 use App\Http\Controllers\User\FileController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ReportController;
 use App\Http\Controllers\User\VideoController;
 

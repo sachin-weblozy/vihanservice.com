@@ -76,7 +76,10 @@
                                         </td>
                                         <td>
                                             <div class="btn-group mb-1">
-                                                <button type="button" class="btn btn-outline-success"><a href="{{ route('user.tickets.show',$ticket->id) }}" class="text-success">Details</a></button>
+                                                @can('Ticket Comment')
+                                                <button type="button" class="btn btn-outline-success"><a href="{{ route('user.tickets.showComments',encrypt($ticket->id)) }}" class="text-success">Comments</a></button>
+                                                @endcan
+                                                <button type="button" class="btn btn-outline-success"><a href="{{ route('user.tickets.show',encrypt($ticket->id)) }}" class="text-success">Details</a></button>
                                                 <button type="button"
                                                     class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
                                                     data-bs-toggle="dropdown" aria-haspopup="true"
@@ -85,14 +88,12 @@
                                                 </button>
 
                                                 <div class="dropdown-menu">
-                                                    @can('Ticket Comment')
-                                                    <button type="button" class="btn btn-outline-success"><a href="{{ route('user.tickets.showComments',$ticket->id) }}" class="text-success">Comments</a></button>
-                                                    @endcan
+                                                    {{-- <a class="dropdown-item" href="{{ route('user.tickets.comments',$ticket->id) }}">Comments</a> --}}
                                                     @can('Ticket Edit')
-                                                    <a class="dropdown-item" href="{{ route('user.tickets.edit',$ticket->id) }}">Edit</a>
+                                                    <a class="dropdown-item" href="{{ route('user.tickets.edit',encrypt($ticket->id)) }}">Edit</a>
                                                     @endcan
                                                     @can('Ticket Delete')
-                                                    <form action="{{ route('user.tickets.destroy', $ticket->id) }}" method="POST" class="inline">
+                                                    <form action="{{ route('user.tickets.destroy', encrypt($ticket->id)) }}" method="POST" class="inline">
                                                         @csrf
                                                         @method('delete')
                                                         <a type="submit" class="dropdown-item" onclick='this.parentNode.submit(); return false;'>Delete</a>

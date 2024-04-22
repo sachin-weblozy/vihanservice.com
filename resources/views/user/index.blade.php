@@ -107,7 +107,7 @@
 									<td>
 										<div class="btn-group mb-1">
 											@can('Ticket Comment')
-											<a href="{{ route('user.tickets.showComments',$ticket->id) }}" class="text-success">
+											<a href="{{ route('user.tickets.showComments',encrypt($ticket->id)) }}" class="text-success">
 												<button type="button" class="btn btn-outline-success py-1">Comments</button>
 											</a>
 											@endcan
