@@ -107,6 +107,8 @@ class TicketController extends Controller
             'description'=>$request->description,
             'status'=> '1',
             'type'=> $request->type,
+            'inst_start'=> $request->inst_start_date,
+            'inst_end'=> $request->inst_end_date,
         ]);
 
         if($result){
@@ -205,6 +207,8 @@ class TicketController extends Controller
                     'files'=>'sometimes',
                 ]);
 
+                $ticket->inst_start = $request->inst_start_date;
+                $ticket->inst_end = $request->inst_end_date;
                 $ticket->description = $request->description;
             }else{
                 $request->validate([

@@ -20,6 +20,8 @@ class Ticket extends Model
         'title',
         'description',
         'type',
+        'inst_start',
+        'inst_end',
         'file_path',
         'status',
         'solved_at',

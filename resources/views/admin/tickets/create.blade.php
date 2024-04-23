@@ -29,6 +29,7 @@
                     <script>
                         $(document).ready(function() {
                             $('.type2').addClass('d-none');
+                            $('.type0').removeClass('d-none');
                         });
                     </script>
                     @endif
@@ -121,6 +122,17 @@
                                         <div class="col-md-12 type2">
                                             <label for="name" class="form-label">Issue</label>
                                             <input type="text" class="form-control slug-title" id="title" name="title" placeholder="What is the Issue?">
+                                        </div>
+                                        <div class="row d-none type0">
+                                            <label class="form-label">Installation Date</label>
+                                            <div class="col-md-6">
+                                                <label class="form-label">From?</label>
+                                                <input type="date" id="inst-start-date" name="inst_start_date">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">To?</label>
+                                                <input type="date" id="inst-end-date" name="inst_end_date">
+                                            </div>
                                         </div>
                                         <div class="col-md-12">
                                             <label class="form-label">Description/Details*</label>
@@ -247,9 +259,20 @@ document.addEventListener('DOMContentLoaded', function() {
             var selectedOption = $(this).val();
             if (selectedOption == 2) {
                 $('.type2').addClass('d-none');
+                $('.type0').removeClass('d-none');
             } else {
                 $('.type2').removeClass('d-none');
+                $('.type0').addClass('d-none');
             }
+        });
+
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementById("inst-start-date").setAttribute("min", today);
+        document.getElementById("inst-end-date").setAttribute("min", today);
+        document.getElementById("inst-start-date").addEventListener("change", function() {
+            // When the start date changes, update the minimum date of the end date input
+            var startDate = document.getElementById("inst-start-date").value;
+            document.getElementById("inst-end-date").setAttribute("min", startDate);
         });
     });
 

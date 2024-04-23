@@ -33,9 +33,11 @@
                                             <h4 class="product-title">{{ $ticket->issuetype->name ?? '' }}</h4>
                                             <h5 class="product-title mt-2">{{ $ticket->issuespec->name ?? '' }}</h5>
                                             <h6 class="product-title mt-2">{{ $ticket->issuesubspec->name ?? '' }}</h6>
+                                            @if($ticket->type == 2)
                                             <p class="product-rate">
-                                                
+                                                Installation Bracket: {{ $ticket->inst_start ?? '' }} - {{ $ticket->inst_end ?? '' }}
                                             </p>
+                                            @endif
                                             <p class="product-desc mt-5">
                                                 {{ $ticket->description ?? '' }}
                                             </p>

@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('type')->nullable();
+            $table->date('inst_start')->nullable();
+            $table->date('inst_end')->nullable();
+            $table->date('purchase_order_date')->nullable();
             $table->string('file_path')->nullable();
             $table->string('status')->nullable();
             $table->timestamp('solved_at')->nullable();
