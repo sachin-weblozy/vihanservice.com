@@ -1,9 +1,4 @@
 <x-guest-layout>
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-                {{ session('status') }}
-            </div>
-        @endif
 
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-10">
@@ -50,6 +45,12 @@
                                     <p class="sign-upp">{{ __("Don't have an account yet ?") }}
                                         <a class="text-blue" href="{{ route('register') }}">Sign Up</a>
                                      </p>
+                                    
+                                     @if (session('status'))
+                                        <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+                                            {{ session('status') }}
+                                        </div>
+                                    @endif
                                     
                                     <x-validation-errors class="my-2" />
                                 </div>

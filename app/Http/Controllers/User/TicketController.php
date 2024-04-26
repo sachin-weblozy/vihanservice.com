@@ -83,13 +83,26 @@ class TicketController extends Controller
                 'issue_specifications'=>'sometimes',
                 'issue_subspecifications'=>'sometimes',
                 'title'=>'sometimes',
-                'description' => 'sometimes',
+                'description' => 'required',
+                'name'=>'sometimes',
+                'phone'=>'sometimes',
+                'company'=>'sometimes',
+                'type'=>'required',
+                'email'=>'required|email',
+                'files'=>'sometimes'
             ]);
         }else{
             $request->validate([
-                'name'=>'required',
-                'phone'=>'required',
-                'company'=>'required',
+                'machine_model'=>'required',
+                'machine_serialno'=>'required',
+                'issue_type'=>'required',
+                'issue_specifications'=>'sometimes',
+                'issue_subspecifications'=>'sometimes',
+                'title'=>'sometimes',
+                'description' => 'required',
+                'name'=>'sometimes',
+                'phone'=>'sometimes',
+                'company'=>'sometimes',
                 'type'=>'required',
                 'email'=>'required|email',
                 'files'=>'sometimes'
