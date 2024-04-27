@@ -139,9 +139,12 @@ class ReportController extends Controller
         }
 
         $warrantyPeriod = null;
+        $extendedWarrantyDate = null;
         if($request->warranty==1){
             $warrantyDate = Carbon::createFromFormat('Y-m-d', $request->installation_date);
             $extendedWarrantyDate = $warrantyDate->addMonths(12);
+        }else{
+            $extendedWarrantyDate = null;
         }
         
         $existingReport = Report::where('ticket_id', $ticket->id)->first();
@@ -294,10 +297,14 @@ class ReportController extends Controller
                 $updatedReportNumber = $rep_type.'/'.$rep_num.'/'.$updatedrep_ver.'/'.$rep_date;
             }
         }
+        
         $warrantyPeriod = null;
+        $extendedWarrantyDate = null;
         if($request->warranty==1){
             $warrantyDate = Carbon::createFromFormat('Y-m-d', $request->installation_date);
             $extendedWarrantyDate = $warrantyDate->addMonths(12);
+        }else{
+            $extendedWarrantyDate = null;
         }
 
         $result = $report->update([
