@@ -149,7 +149,7 @@
             <div style=" text-align:left; ">
                 <div style="">
                     <p style="margin-bottom: 10px;">
-                        <a href="#"><img src="logo.webp" style="" alt="" width=""></a>
+                        <a href="#"><img src="logo.png" style="" alt="" width=""></a>
                     </p>
                 </div>
             </div>
