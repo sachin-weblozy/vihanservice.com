@@ -336,20 +336,15 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         let options = {
-        selector: '#tinymce-default',
-        height: 250,
-        menubar: false,
-        statusbar: false,
-        plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount'
-        ],
-        toolbar: 'undo redo | formatselect | ' +
-            'bold italic backcolor | alignleft aligncenter ' +
-            'alignright alignjustify | bullist numlist outdent indent | ' +
-            'removeformat',
-        content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }'
+            selector: '#tinymce-default',
+            height: 350,
+            // menubar: false,
+            statusbar: false,
+            plugins: 'advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount', // Include all desired plugins
+            toolbar: 'formatselect | bold italic strikethrough forecolor backcolor | link image | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | code', // Customize toolbar with desired buttons
+            menubar: 'file edit view insert format tools table help', // Add menu items
+            toolbar_mode: 'floating', // Use a floating toolbar
+            content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }'
         }
         options.skin = 'oxide';
         options.content_css = 'light';
