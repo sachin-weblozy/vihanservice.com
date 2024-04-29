@@ -320,7 +320,7 @@ class ReportController extends Controller
             'asset_number' => $request->asset_number,
             'installation_date' => $request->installation_date,
             'location' => $request->location,
-            // 'under_warranty' => $request->warranty,
+            'under_warranty' => $request->warranty,
             'warranty_period' => $extendedWarrantyDate,
             'amc_required' => $request->amc,
             'installation_notes' => $request->installation_note,
