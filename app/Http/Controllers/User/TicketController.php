@@ -154,10 +154,18 @@ class TicketController extends Controller
             $userDetails = [
                 'email' => Auth::user()->email,
                 'ticket_id' => $result->id,
+                'user_name' => Auth::user()->name,
+                'user_phone' => Auth::user()->phone,
+                'ticket_type' => $result->type,
+                'date' => $result->created_at,
             ];
             $adminDetails = [
                 'email' => $usersemail,
                 'ticket_id' => $result->id,
+                'user_name' => Auth::user()->name,
+                'user_phone' => Auth::user()->phone,
+                'ticket_type' => $result->type,
+                'date' => $result->created_at,
             ];
 
             dispatch(new SendNewTicektMailAdmin($adminDetails));

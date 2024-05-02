@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Mail\UserNewTicketMail;
+use App\Mail\UserNewCommentMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class SendNewTicektMailUser implements ShouldQueue
+class SendNewCommentMailUser implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -30,14 +30,10 @@ class SendNewTicektMailUser implements ShouldQueue
     public function handle(): void
     {
         $data = [
-            'email' => $this->details['email'],
             'ticket_id' => $this->details['ticket_id'],
-            'user_name' => $this->details['user_name'],
-            'user_phone' => $this->details['user_phone'],
-            'ticket_type' => $this->details['ticket_type'],
-            'date' => $this->details['date'],
+            'user_name' => $this->details['username'],
         ];
 
-        Mail::to($this->details['email'])->send(new UserNewTicketMail($data));
+        Mail::to($this->details['email'])->send(new UserNewCommentMail($data));
     }
 }

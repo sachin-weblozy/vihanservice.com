@@ -29,7 +29,15 @@ class SendNewTicektMailAdmin implements ShouldQueue
      */
     public function handle(): void
     {
-        $email = new AdminNewTicketMail();
-        Mail::to($this->details['email'])->send($email);
+        $data = [
+            'email' => $this->details['email'],
+            'ticket_id' => $this->details['ticket_id'],
+            'user_name' => $this->details['user_name'],
+            'user_phone' => $this->details['user_phone'],
+            'ticket_type' => $this->details['ticket_type'],
+            'date' => $this->details['date'],
+        ];
+
+        Mail::to($this->details['email'])->send(new AdminNewTicketMail($data));
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket Confirmation: Your Issue Is Being Addressed</title>
+    <title>New Comment on Ticket</title>
     <style>
     
         .container {
@@ -18,7 +18,7 @@
         .header {
             text-align: center;
             padding: 20px;
-            background: #D3D3D3;
+            background: #D3D3D3; 
             color: #fff;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
@@ -81,43 +81,20 @@
             <img src="https://vihanservice.com/logo2.webp" alt="Company Logo">
         </div>
 
-  
+
         <div class="content">
-            @if($data['ticket_type']==1)
-            <h1>New Remote Service Ticket Created</h1>
-            @endif
-
-            @if($data['ticket_type']==2)
-            <h1>New Installation and Commissioning Ticket Created</h1>
-            @endif
-
-            @if($data['ticket_type']==3)
-            <h1>New Field Service Ticket Created</h1>
-            @endif
-
+            <h1>NEW COMMENT RECEIVED</h1>
             <p>Dear {{ $data['user_name'] ?? '' }},</p>
-            <p>Thank you for creating a service request on the Vihan Service Portal. Kindly do wait while we are working on your request. One of our associates will be responding to the issue at the earliest.</p>
-
-            <p>Here are the details of your request:</p>
-            
-            <ul>
-                <li><b>Executive Name:-</b> {{ $data['user_name'] ?? '' }}</li>
-                <li><b>Date:-</b> {{ $data['date'] ?? '' }}</li>
-                <li><b>Phone Number:-</b> {{ $data['user_phone'] ?? '' }}</li>
-                <li><b>Email ID:-</b> {{ $data['email'] ?? '' }}</li>
-                <li><b>Ticket ID:-</b> {{ $data['ticket_id'] ?? '' }}</li>
-            </ul>
-            <p>Click here to register on our Service Portal and make use of all features for our machinery.</p>
-           
-            <p class="note" > <span style="color: #ff0000;">Note: </span>Our Regular Business Hours are Monday – Saturday 8:30 AM IST to 5:40 PM IST {1st/2nd/3rd/4th Sunday WOFF; 1st/3rd Saturday COFF}. The response time maybe higher during WOFF/COFF or after normal business hours. We thank you for your patience.</p>
+            <p>We wanted to inform you that a new comment has been added to your Ticket ID {{ $data['ticket_id'] ?? '' }}. You can view the comment and respond accordingly by logging into your account on our platform.</p>
+            <p> Thank you for reaching out. One of our associates will be responding to the issue at the earliest.</p>
+          
         </div>
-
         
         <div class="footer">
             <p><strong> Plant:</strong> &nbsp;&nbsp;Block No 22B, Vasna Chacharvadi, Sarkhej - Bavla Highway, Ahmedabad, GJ 382213. Phone: +91-9099032640 </p>
             <p><strong>Vihan HO:</strong> &nbsp;&nbsp;B 613/614, Navratna Corporate Park, Bopal-Ambli Road, Ahmedabad 380058, GJ</p>
+            <p></p>
         </div>
-        <p><a href="https://vihanservice.com/register">Click here</a> to register on our Service Portal and make use of all features for our machinery.</p>
     </div>
 </body>
 </html>

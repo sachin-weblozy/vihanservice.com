@@ -12,13 +12,14 @@ use Illuminate\Queue\SerializesModels;
 class UserNewTicketMail extends Mailable
 {
     use Queueable, SerializesModels;
+    public $data;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -26,9 +27,22 @@ class UserNewTicketMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        return new Envelope(
-            subject: 'New Ticket Submitted',
-        );
+        if($this->data['ticket_type']==1){
+            return new Envelope(
+                subject: 'Ticket ID: '.$this->data['ticket_id'].' | New Remote Service Ticket Created',
+            );
+        }
+        if($this->data['ticket_type']==2){
+            return new Envelope(
+                subject: 'Ticket ID: '.$this->data['ticket_id'].' | New Installation and Commissioning Ticket Created',
+            );
+        }
+        if($this->data['ticket_type']==3){
+            return new Envelope(
+                subject: 'Ticket ID: '.$this->data['ticket_id'].' | New Field Service Ticket Created',
+            );
+        }
+        
     }
 
     /**

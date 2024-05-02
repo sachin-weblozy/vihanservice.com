@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class AdminNewTicketMail extends Mailable
+class UserNewCommentMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $data;
@@ -28,7 +28,7 @@ class AdminNewTicketMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Ticket Received',
+            subject: 'New Comment on Ticket ID: '.$this->data['ticket_id'],
         );
     }
 
@@ -38,7 +38,7 @@ class AdminNewTicketMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.admin.new_ticket',
+            view: 'emails.user.new_comment',
         );
     }
 
