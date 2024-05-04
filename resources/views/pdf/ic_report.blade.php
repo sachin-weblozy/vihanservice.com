@@ -495,7 +495,7 @@
                             <b>Disclaimer</b> <br><br>
                             @if($report->type==2)
                             This Service Report ("Report") has been prepared by Vihan Engineering Pvt. Ltd. for the purpose of documenting the Installation & Commissioning of {{ $report->machine_model ?? '' }} - {{ $report->machine_serialno ?? '' }}.
-
+                            <br>
                             <b>Accuracy</b>: While utmost care has been taken to ensure the accuracy of the information contained in this Report, Vihan Engineering Pvt. Ltd. cannot guarantee that all details are error-free or complete. Users of this Report should independently verify any critical information. 
                             <br>
                             <b>Scope</b>: This Report is specific to the Installation & Commissioning of {{ $report->machine_model ?? '' }} - {{ $report->machine_serialno ?? '' }} as conducted by Vihan Engineering Pvt. Ltd. It may not encompass all aspects of the overall project or system integration unless explicitly stated. 
@@ -515,7 +515,7 @@
                             @elseif($report->type==3)
 
                             This Service Report ("Report") has been prepared by Vihan Engineering Pvt. Ltd. for the purpose of documenting the Field Service of {{ $report->machine_model ?? '' }} - {{ $report->machine_serialno ?? '' }}.
-
+                            <br>
                             <b>Accuracy</b>: While utmost care has been taken to ensure the accuracy of the information contained in this Report, Vihan Engineering Pvt. Ltd. cannot guarantee that all details are error-free or complete. Users of this Report should independently verify any critical information. 
                             <br>
                             <b>Scope</b>: This Report is specific to the Field Service of {{ $report->machine_model ?? '' }} - {{ $report->machine_serialno ?? '' }} as conducted by Vihan Engineering Pvt. Ltd. It may not encompass all aspects of the overall project or system integration unless explicitly stated. 
