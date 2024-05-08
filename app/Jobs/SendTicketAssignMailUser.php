@@ -29,7 +29,6 @@ class SendTicketAssignMailUser implements ShouldQueue
      */
     public function handle(): void
     {
-        $email = new UserTicketAssignMail();
-        Mail::to($this->details['email'])->send($email);
+        Mail::to($this->details['email'])->send(new UserTicketAssignMail($this->details));
     }
 }
