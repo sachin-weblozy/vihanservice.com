@@ -1,196 +1,123 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <meta name="x-apple-disable-message-reformatting">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="telephone=no" name="format-detection">
-    <title>New Ticket Received</title>
-    <!--[if (mso 16)]>
-    <style type="text/css">
-    a {text-decoration: none;}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Confirmation: Your Issue Is Being Addressed</title>
+    <style>
+    
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: Arial;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: #D3D3D3;
+            color: #fff;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .header img {
+            max-width: 150px;
+            height: auto;
+        }
+
+      
+        .content {
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #34495e; 
+            text-align: center;
+        }
+
+        .content p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .content .note {
+            background-color: #f0f0f0;
+            border-left: 4px solid #ffab00;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+  
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #D3D3D3; 
+            color: #000000;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .footer p {
+            margin-bottom: 5px;
+            font-size: 17px;
+        }
+
     </style>
-    <![endif]-->
-    <!--[if gte mso 9]><style>sup { font-size: 100% !important; }</style><![endif]-->
-    <!--[if gte mso 9]>
-<xml>
-    <o:OfficeDocumentSettings>
-    <o:AllowPNG></o:AllowPNG>
-    <o:PixelsPerInch>96</o:PixelsPerInch>
-    </o:OfficeDocumentSettings>
-</xml>
-<![endif]-->
-    <!--[if !mso]> -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
-
 </head>
-
 <body>
-    <div dir="ltr" class="es-wrapper-color">
-        <!--[if gte mso 9]>
-			<v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
-				<v:fill type="tile" color="#ffffff"></v:fill>
-			</v:background>
-		<![endif]-->
-        <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0">
-            <tbody>
-                <tr>
-                    <td class="esd-email-paddings" valign="top">
-                        <table class="es-header" cellspacing="0" cellpadding="0" align="center">
-                            <tbody>
-                                <tr>
-                                    <td class="es-adaptive esd-stripe" esd-custom-block-id="8429" align="center">
-                                        <table class="es-header-body" cellspacing="0" cellpadding="0" align="center">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="esd-structure es-p25t es-p10b es-p20r es-p20l" align="left">
-                                                        <!--[if mso]><table width="560" cellpadding="0"
-                            cellspacing="0"><tr><td width="205" valign="top"><![endif]-->
-                                                        <table class="es-left" cellspacing="0" cellpadding="0" align="left">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td class="es-m-p0r es-m-p20b esd-container-frame" width="205" valign="top" align="center">
-                                                                        <table width="100%" cellspacing="0" cellpadding="0">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class="esd-block-image es-m-p0l es-m-txt-c" align="center" style="font-size:0"><a href="#" target="_blank"><img src="{{ asset('logo.webp') }}" alt="Logo" style="display: block;" title="Logo" width="188"></a></td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="es-content" cellspacing="0" cellpadding="0" align="center">
-                            <tbody>
-                                <tr>
-                                    <td class="esd-stripe" align="center">
-                                        <table class="es-content-body" style="border-left:1px solid transparent;border-right:1px solid transparent;border-top:1px solid transparent;border-bottom:1px solid transparent;" width="600" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="esd-structure es-p40t es-p10b es-p20r es-p20l" esd-custom-block-id="8431" align="left">
-                                                        <table width="100%" cellspacing="0" cellpadding="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td class="esd-container-frame" width="558" align="left">
-                                                                        <table width="100%" cellspacing="0" cellpadding="0">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class="esd-block-image es-p5b es-p5l es-m-txt-c" align="center" style="font-size:0"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td class="esd-block-text es-m-txt-c" align="center">
-                                                                                        <h1>New Ticket Received!<br></h1>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="esd-structure es-p20t" align="left">
-                                                        <table width="100%" cellspacing="0" cellpadding="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td class="esd-container-frame" width="598" valign="top" align="center">
-                                                                        <table width="100%" cellspacing="0" cellpadding="0">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class="esd-block-spacer es-p20t es-p10b" align="center" style="font-size:0">
-                                                                                        <table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0">
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td style="border-bottom: 1px solid #efefef; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; height: 1px; width: 100%; margin: 0px;"></td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="es-content" cellspacing="0" cellpadding="0" align="center">
-                            <tbody>
-                                <tr></tr>
-                                <tr>
-                                    <td class="esd-stripe" esd-custom-block-id="8442" style="background-color: #f7f7f7;" bgcolor="#f7f7f7" align="center">
-                                        <table class="es-footer-body" width="600" cellspacing="0" cellpadding="0" align="center">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="esd-structure es-p20t es-p20b es-p20r es-p20l" esd-general-paddings-checked="false" align="left">
-                                                        <table width="100%" cellspacing="0" cellpadding="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td class="esd-container-frame" width="560" valign="top" align="center">
-                                                                        <table width="100%" cellspacing="0" cellpadding="0">
-                                                                            <tbody>
-                                                                                
-                                                                                <tr>
-                                                                                    {{-- <tr>
-                                                                                        <td class="esd-block-text es-p15t es-p20r es-p20l" align="center">
-                                                                                            <p style="font-size: 18px; font-family: lato, helvetica\ neue, helvetica, arial, sans-serif; color: black;"><em>Ticket ID: {{ $report->ticket_id ?? '' }} <br></em></p>
-                                                                                        </td>
-                                                                                    </tr> --}}
-                                                                                    {{-- <tr>
-                                                                                        <td class="esd-block-text es-p15t es-p20r es-p20l" align="center">
-                                                                                            <p style="font-size: 18px; font-family: lato, helvetica\ neue, helvetica, arial, sans-serif; color: black;"><em>Report Number: {{ $report->report_number ?? '' }} <br></em></p>
-                                                                                        </td>
-                                                                                    </tr> --}}
-                                                                                    <td class="esd-block-text es-p10t es-p10b" align="center">
-                                                                                        <p style="line-height: 150%;">You have received a new ticket. Please review it at your earliest convenience and take necessary actions accordingly.</p>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td class="esd-block-text es-p10t es-p10b" align="center">
-                                                                                        <br>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="container">
+      
+        <div class="header">
+            <img src="https://vihanservice.com/logo2.webp" alt="Company Logo">
+        </div>
+
+  
+        <div class="content">
+            @if($data['ticket_type']==1)
+            <h1>New Remote Service Ticket Created</h1>
+            @endif
+
+            @if($data['ticket_type']==2)
+            <h1>New Installation and Commissioning Ticket Created</h1>
+            @endif
+
+            @if($data['ticket_type']==3)
+            <h1>New Field Service Ticket Created</h1>
+            @endif
+
+            <p>Dear {{ $data['user_name'] ?? '' }},</p>
+            <p>Thank you for creating a service request on the Vihan Service Portal. Kindly do wait while we are working on your request. One of our associates will be responding to the issue at the earliest.</p>
+
+            <p>Here are the details of your request:</p>
+            
+            <ul>
+                <li><b>Executive Name:-</b> {{ $data['user_name'] ?? '' }}</li>
+                <li><b>Date:-</b> {{ $data['date'] ?? '' }}</li>
+                <li><b>Phone Number:-</b> {{ $data['user_phone'] ?? '' }}</li>
+                <li><b>Email ID:-</b> {{ $data['email'] ?? '' }}</li>
+                <li><b>Ticket ID:-</b> {{ $data['ticket_id'] ?? '' }}</li>
+            </ul>
+            <p>Click here to register on our Service Portal and make use of all features for our machinery.</p>
+           
+            <p class="note" > <span style="color: #ff0000;">Note: </span>Our Regular Business Hours are Monday – Saturday 8:30 AM IST to 5:40 PM IST {1st/2nd/3rd/4th Sunday WOFF; 1st/3rd Saturday COFF}. The response time maybe higher during WOFF/COFF or after normal business hours. We thank you for your patience.</p>
+        </div>
+
+        
+        <div class="footer">
+            <p><strong> Plant:</strong> &nbsp;&nbsp;Block No 22B, Vasna Chacharvadi, Sarkhej - Bavla Highway, Ahmedabad, GJ 382213. Phone: +91-9099032640 </p>
+            <p><strong>Vihan HO:</strong> &nbsp;&nbsp;B 613/614, Navratna Corporate Park, Bopal-Ambli Road, Ahmedabad 380058, GJ</p>
+        </div>
+        <p><a href="https://vihanservice.com/register">Click here</a> to register on our Service Portal and make use of all features for our machinery.</p>
     </div>
 </body>
-
 </html>
