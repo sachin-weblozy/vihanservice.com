@@ -413,7 +413,7 @@ class TicketController extends Controller
             if($validated['status']==4){
                 $userDetails = [
                     'email' => $ticket->user->email,
-                    'ticket_id' => $ticket->user->id,
+                    'ticket_id' => $ticket->id,
                 ];
                 dispatch(new SendTicketSolvedMailUser($userDetails));
             }
