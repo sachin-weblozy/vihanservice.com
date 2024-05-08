@@ -43,7 +43,7 @@ class AdminNewReportMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Report Created',
+            subject: 'Ticket ID: '.$this->ticketid.' | New Report Created',
         );
     }
 

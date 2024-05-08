@@ -91,7 +91,7 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td class="esd-block-text es-m-txt-c" align="center">
-                                                                                        <h1>New Ticket Submitted!<br></h1>
+                                                                                        <h1>Ticket Solved!<br></h1>
                                                                                     </td>
                                                                                 </tr>
                                                                                 

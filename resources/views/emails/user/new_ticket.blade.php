@@ -107,7 +107,6 @@
                 <li><b>Email ID:-</b> {{ $data['email'] ?? '' }}</li>
                 <li><b>Ticket ID:-</b> {{ $data['ticket_id'] ?? '' }}</li>
             </ul>
-            <p>Click here to register on our Service Portal and make use of all features for our machinery.</p>
            
             <p class="note" > <span style="color: #ff0000;">Note: </span>Our Regular Business Hours are Monday – Saturday 8:30 AM IST to 5:40 PM IST {1st/2nd/3rd/4th Sunday WOFF; 1st/3rd Saturday COFF}. The response time maybe higher during WOFF/COFF or after normal business hours. We thank you for your patience.</p>
         </div>

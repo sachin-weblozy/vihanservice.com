@@ -381,6 +381,7 @@ class TicketController extends Controller
         }
 
         $userDetails['email'] = $ticket->user->email;
+        $userDetails['ticket_id'] = $ticket->id;
 
         dispatch(new SendTicketAssignMailUser($userDetails));
 

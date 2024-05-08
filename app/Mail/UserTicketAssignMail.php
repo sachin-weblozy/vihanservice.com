@@ -12,13 +12,14 @@ use Illuminate\Queue\SerializesModels;
 class UserTicketAssignMail extends Mailable
 {
     use Queueable, SerializesModels;
+    public $data;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -27,7 +28,7 @@ class UserTicketAssignMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Ticket Assigned to Technician',
+            subject: 'Ticket ID: '.$this->data['ticket_id'].' | Technician Assigned',
         );
     }
 

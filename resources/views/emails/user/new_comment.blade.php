@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Comment on Ticket</title>
+    <title>New Comment on Ticket ID: {{ $data['ticket_id'] ?? '' }}</title>
     <style>
     
         .container {
