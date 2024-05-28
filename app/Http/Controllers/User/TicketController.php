@@ -164,6 +164,7 @@ class TicketController extends Controller
                 'ticket_id' => $result->id,
                 'user_name' => Auth::user()->name,
                 'user_phone' => Auth::user()->phone,
+                'user_email' => Auth::user()->email,
                 'ticket_type' => $result->type,
                 'date' => $result->created_at,
             ];

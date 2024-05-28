@@ -34,6 +34,7 @@ class SendNewTicektMailAdmin implements ShouldQueue
             'ticket_id' => $this->details['ticket_id'],
             'user_name' => $this->details['user_name'],
             'user_phone' => $this->details['user_phone'],
+            'user_email' => $this->details['user_email'],
             'ticket_type' => $this->details['ticket_type'],
             'date' => $this->details['date'],
         ];

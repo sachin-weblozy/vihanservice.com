@@ -104,7 +104,7 @@
                 <li><b>Executive Name:-</b> {{ $data['user_name'] ?? '' }}</li>
                 <li><b>Date:-</b> {{ $data['date'] ?? '' }}</li>
                 <li><b>Phone Number:-</b> {{ $data['user_phone'] ?? '' }}</li>
-                <li><b>Email ID:-</b> {{ $data['email'] ?? '' }}</li>
+                <li><b>Email ID:-</b> {{ $data['user_email'] ?? '' }}</li>
                 <li><b>Ticket ID:-</b> {{ $data['ticket_id'] ?? '' }}</li>
             </ul>
             
