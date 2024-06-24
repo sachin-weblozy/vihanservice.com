@@ -31,7 +31,8 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Vendor</th>
+                                        <th>Customer Executive Name</th>
+                                        <th>Company</th>
                                         <th>Issue</th>
                                         <th>Raised on</th>
                                         <th>Type</th>
@@ -46,6 +47,7 @@
                                     <tr>
                                         <td>{{$ticket->id ?? ''}}</td>
                                         <td>{{$ticket->user->name ?? ''}}</td>
+                                        <td>{{$ticket->user->company ?? ''}}</td>
                                         <td>
                                             @if($ticket->type != 2)
                                             {{$ticket->issuetype->name ?? ''}}

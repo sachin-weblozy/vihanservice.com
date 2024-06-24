@@ -12,12 +12,12 @@
                     </div>
                 </div>
                 <div class="card-body p-5">
-                    <h4 class="text-dark mb-5">Sign Up</h4>
+                    <h4 class="text-dark mb-2">Sign Up</h4>
                     
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="row">
-                            <div class="form-group col-md-12 mb-4">
+                            <div class="form-group col-md-12 ">
                                 <x-label for="name" value="{{ __('Name') }}" />
                                 <x-input id="name" class="form-control" type="text" placeholder="Enter your Name" name="name" :value="old('name')" required autofocus autocomplete="name" />
                             </div>
@@ -30,6 +30,11 @@
                             <div class="form-group col-md-12">
                                 <x-label for="phone" value="{{ __('Phone Number') }}" />
                                 <x-input id="phone" class="form-control" type="text" placeholder="Enter your Phone Number" name="phone" :value="old('phone')" required autocomplete="phone" />
+                            </div>
+
+                            <div class="form-group col-md-12 ">
+                                <x-label for="company" value="{{ __('Company Name') }}" />
+                                <x-input id="company" class="form-control" type="text" placeholder="Enter your Company Name" name="company" :value="old('company')" required autocomplete="company" />
                             </div>
                             
                             <div class="form-group col-md-12 ">
