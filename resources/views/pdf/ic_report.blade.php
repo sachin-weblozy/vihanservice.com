@@ -217,6 +217,18 @@
                         <td align="left" style="width:8%;" colspan="1">
                             {{ $i }} @php $i++; @endphp
                         </td>
+                        <td align="left" style="width:46%;" colspan="2">
+                            <b>CUSTOMER COMPANY NAME:</b>
+                        </td>
+                        <td align="left" style="width:46%;" colspan="2">
+                            {{ $report->ticket->user->company ?? '' }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="left" style="width:8%;" colspan="1">
+                            {{ $i }} @php $i++; @endphp
+                        </td>
                         <td align="left" style="width:23%;" colspan="1">
                             <b>INVOICE NO (IF ANY):</b>
                         </td>

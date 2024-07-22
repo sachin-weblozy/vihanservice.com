@@ -57,4 +57,9 @@ class Report extends Model
         'cust4_phone',
         'cust4_sign',
     ];
+
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class, 'ticket_id', 'id');
+    }
 }
